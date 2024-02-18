@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Cookies from 'js-cookie';
 
 import './index.css';
@@ -49,6 +50,8 @@ class LoginRoute extends Component {
     }
   };
 
+  
+
   handleSignUp = async (e) => {
     e.preventDefault();
     let url = 'http://localhost:3000/register';
@@ -70,8 +73,11 @@ class LoginRoute extends Component {
     };
 
     const response = await fetch(url, options);
+   
+    
     if (response.ok === true) {
-      console.log('User Registered Successfully');
+      console.log('User Registered Successfully'); 
+       
     } else {
       this.setState({ error: 'User already exists' });
     }

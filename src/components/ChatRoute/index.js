@@ -23,9 +23,11 @@ class ChatRoute extends Component {
         this.setState({ message: '' })
     }
 
-    
-
-    
+    handleOnClickSignOut = () =>{
+        const {history} = this.props
+        Cookies.remove('jwt_token')
+        history.replace('/login')
+    }
 
     render() {
         const { messagesList,message } = this.state
@@ -35,6 +37,7 @@ class ChatRoute extends Component {
                     <div className='chat-header-container'>
                         <h1 className='heading'>ChatSphere</h1>
                         <FaUserCircle className='user-icon'/>
+                        <button type="button" onClick={this.handleOnClickSignOut} className='signout'>SignOut</button>
                     </div>
                     <div className='visiters-container'>
                         <p className='name-icon'>NA</p>
@@ -43,14 +46,15 @@ class ChatRoute extends Component {
                     </div>
                 </div>
                 <div className="messages-container">
-                    {messagesList.length !== 0 ? (
+                    {messagesList.length !== 0 ? (<>
+                       
                         <ul className='ul-container'>
                             {messagesList.map((item, index) => (
                                 <>
                                 <li key={index} className='li-element'><span className='text'>{item.text}</span></li><br/>
                                 </>
                             ))}
-                        </ul>
+                        </ul></>
                     ) : (
                         <p className='main-heding'>Enjoy Your Chat</p>
                     )}
